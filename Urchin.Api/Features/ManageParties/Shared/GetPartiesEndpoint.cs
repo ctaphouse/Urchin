@@ -13,11 +13,11 @@ using System.Security.Claims;
 
 namespace Urchin.Api.Features.ManageParties.Shared;
 
-public class GetPartyEndpoint : EndpointBaseAsync.WithoutRequest.WithActionResult<GetPartiesRequest.Response>
+public class GetPartiesEndpoint : EndpointBaseAsync.WithoutRequest.WithActionResult<GetPartiesRequest.Response>
 {
     private readonly UrchinContext _context;
 
-    public GetPartyEndpoint(UrchinContext context)
+    public GetPartiesEndpoint(UrchinContext context)
     {
         _context = context;
     }
