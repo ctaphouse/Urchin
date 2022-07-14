@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Urchin.Api.Persistence;
 
@@ -10,9 +11,10 @@ using Urchin.Api.Persistence;
 namespace Urchin.Api.Migrations
 {
     [DbContext(typeof(UrchinContext))]
-    partial class UrchinContextModelSnapshot : ModelSnapshot
+    [Migration("20220714120539_EthnicityMigration3")]
+    partial class EthnicityMigration3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,7 +82,9 @@ namespace Urchin.Api.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("EthnicityId")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1);
 
                     b.Property<string>("FirstName")
                         .IsRequired()

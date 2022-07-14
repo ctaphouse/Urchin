@@ -11,6 +11,7 @@ public class UrchinContext : DbContext
     }
 
     public DbSet<President> Presidents { get; set; } = default!;
+    public DbSet<Ethnicity> Ethnicities { get; set; } = default!;
     public DbSet<Party> Parties { get; set; } = default!;
     public DbSet<Voter> Voters { get; set; } = default!;
 

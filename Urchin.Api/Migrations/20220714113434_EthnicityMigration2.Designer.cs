@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Urchin.Api.Persistence;
 
@@ -10,9 +11,10 @@ using Urchin.Api.Persistence;
 namespace Urchin.Api.Migrations
 {
     [DbContext(typeof(UrchinContext))]
-    partial class UrchinContextModelSnapshot : ModelSnapshot
+    [Migration("20220714113434_EthnicityMigration2")]
+    partial class EthnicityMigration2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,9 +81,6 @@ namespace Urchin.Api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("EthnicityId")
-                        .HasColumnType("int");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -94,8 +93,6 @@ namespace Urchin.Api.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EthnicityId");
 
                     b.HasIndex("PartyId");
 
@@ -140,19 +137,11 @@ namespace Urchin.Api.Migrations
 
             modelBuilder.Entity("Urchin.Api.Persistence.Entities.President", b =>
                 {
-                    b.HasOne("Urchin.Api.Persistence.Entities.Ethnicity", "Ethnicity")
-                        .WithMany()
-                        .HasForeignKey("EthnicityId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("Urchin.Api.Persistence.Entities.Party", "Party")
                         .WithMany()
                         .HasForeignKey("PartyId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.Navigation("Ethnicity");
 
                     b.Navigation("Party");
                 });
