@@ -13,6 +13,7 @@ public class UrchinContext : DbContext
     public DbSet<President> Presidents { get; set; } = default!;
     public DbSet<Ethnicity> Ethnicities { get; set; } = default!;
     public DbSet<Party> Parties { get; set; } = default!;
+    public DbSet<Gender> Genders { get; set; } = default!;
     public DbSet<Voter> Voters { get; set; } = default!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -25,6 +26,8 @@ public class UrchinContext : DbContext
 
         foreach(var foreignKey in foreignKeys)
             foreignKey.DeleteBehavior=DeleteBehavior.Restrict;
+
+        modelBuilder.Entity<President>().Property(p => p.GenderId).HasDefaultValue(1);
             
     }
 }
