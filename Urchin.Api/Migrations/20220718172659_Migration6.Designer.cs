@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Urchin.Api.Persistence;
 
@@ -10,9 +11,10 @@ using Urchin.Api.Persistence;
 namespace Urchin.Api.Migrations
 {
     [DbContext(typeof(UrchinContext))]
-    partial class UrchinContextModelSnapshot : ModelSnapshot
+    [Migration("20220718172659_Migration6")]
+    partial class Migration6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -119,8 +121,6 @@ namespace Urchin.Api.Migrations
 
                     b.HasIndex("EthnicityId");
 
-                    b.HasIndex("GenderId");
-
                     b.HasIndex("PartyId");
 
                     b.ToTable("Presidents", "urchin");
@@ -170,12 +170,6 @@ namespace Urchin.Api.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Urchin.Api.Persistence.Entities.Gender", "Gender")
-                        .WithMany()
-                        .HasForeignKey("GenderId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("Urchin.Api.Persistence.Entities.Party", "Party")
                         .WithMany()
                         .HasForeignKey("PartyId")
@@ -183,8 +177,6 @@ namespace Urchin.Api.Migrations
                         .IsRequired();
 
                     b.Navigation("Ethnicity");
-
-                    b.Navigation("Gender");
 
                     b.Navigation("Party");
                 });
