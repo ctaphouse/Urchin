@@ -1,0 +1,47 @@
+@page "/add-gender"
+@using Urchin.Shared.Features.ManageGenders.AddGender
+@using Urchin.Shared.Features.ManageGenders.Shared
+@inject IMediator Mediator
+
+<PageTitle>Add Gender - Taphouse Enterprises</PageTitle>
+
+<EditForm Model="_gender" OnSubmit="SubmitForm">
+    <div class="row">
+        <div class="col-6">
+            <label for="genderName" class="font-weight-bold text-secondary">Name</label>
+            <InputText id="genderName" class="form-control" @bind-Value="_gender.Name"></InputText>
+        </div>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Submit</button>
+
+    <button class="btn btn-primary btn-sm" type="button" @onclick="ChangeMessage">Change Message</button>
+</EditForm>
+
+<p>@_message</p>
+
+
+@code {
+    private GenderDto _gender = new GenderDto();
+    private string? _message = "No message to display.";
+
+    private async Task SubmitForm()
+    {
+        _message = "hello";
+
+        var response = await Mediator.Send(new AddGenderRequest(_gender));
+
+        if(response.GenderId == -1)
+            _message = "There was a problem adding the gender";
+        else
+            _message = @"Gender with Id = " + response.GenderId.ToString() + " had been added";
+
+        StateHasChanged();
+    }
+
+    private void ChangeMessage()
+    {
+        _message = @"Message is " + _gender.Name;
+    }
+
+}
