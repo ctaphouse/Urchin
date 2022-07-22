@@ -2,6 +2,8 @@ using MediatR;
 using System.Net.Http.Json;
 using Urchin.Shared.Features.ManageGenders.DeleteGender;
 
+namespace Urchin.Client.Features.ManageGenders.DeleteGender;
+
 public class DeleteGenderHandler : IRequestHandler<DeleteGenderRequest, DeleteGenderRequest.Response>
 {
     private readonly HttpClient _httpClient;
